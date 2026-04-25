@@ -16,3 +16,8 @@ export const createProduct = async (data: any) => {
   const res = await api.post("/products", data);
   return res.data;
 };
+
+export const addVariant = async (productId: string, data: any) => {
+  const res = await api.post(`/products/${productId}/variants`, data);
+  return res.data;
+};

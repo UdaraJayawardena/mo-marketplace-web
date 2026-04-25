@@ -5,11 +5,13 @@ import type { Product } from "../types";
 import VariantSelector from "../components/VariantSelector";
 import Layout from "../components/Layout";
 import { useNavigate } from "react-router-dom";
+import { addVariant } from "../api/products";
 
 export default function ProductDetail() {
   const { id } = useParams();
   const [product, setProduct] = useState<Product | null>(null);
   const navigate = useNavigate();
+
 
   useEffect(() => {
     if (id) {
@@ -33,6 +35,10 @@ export default function ProductDetail() {
           }}
         >
           ← Back to Products
+        </button>
+
+        <button onClick={() => navigate(`/products/${id}/variants`)}>
+          Add Variants
         </button>
 
         <h1>{product.name}</h1>

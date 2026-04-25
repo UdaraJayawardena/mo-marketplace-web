@@ -1,10 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ProductList from "./pages/ProductList";
 import ProductDetail from "./pages/ProductDetail";
+import AddVariants from "./pages/AddVariants";
 import CreateProduct from "./pages/CreateProduct";
 import Login from "./pages/Login";
 import ProtectedRoute from "./routes/ProtectedRoute";
-import { getToken } from "./store/auth";
+// import { getToken } from "./store/auth";
 import { Navigate } from "react-router-dom";
 import { isAuthenticated } from "./store/auth";
 
@@ -52,6 +53,15 @@ function App() {
             ) : (
               <Navigate to="/login" replace />
             )
+          }
+        />
+
+        <Route
+          path="/products/:id/variants"
+          element={
+            <ProtectedRoute>
+              <AddVariants />
+            </ProtectedRoute>
           }
         />
       </Routes>
