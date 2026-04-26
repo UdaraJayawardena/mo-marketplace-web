@@ -1,15 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react"; // 👈 added useEffect
 import type { Variant } from "../types";
 import { toast } from "react-toastify";
 
 interface Props {
   variants: Variant[];
+  onSelect: (variant: Variant | null) => void;
 }
 
-export default function VariantSelector({ variants }: Props) {
+export default function VariantSelector({ variants, onSelect }: Props) {
   const [selected, setSelected] = useState<Record<string, string>>({});
 
-  // Extract attribute options
   const options: Record<string, Set<string>> = {};
 
   variants.forEach((variant) => {
@@ -19,7 +19,6 @@ export default function VariantSelector({ variants }: Props) {
     });
   });
 
-  // Convert sets to arrays
   const optionLists = Object.fromEntries(
     Object.entries(options).map(([key, value]) => [key, Array.from(value)]),
   );
@@ -32,16 +31,21 @@ export default function VariantSelector({ variants }: Props) {
     );
   };
 
-  const isOptionValid = (key: string, value: string) => {
-    const testSelection = {
-      ...selected,
-      [key]: value,
-    };
-    const variant = getVariant(testSelection);
-    return variant && variant.stock > 0;
-  };
+const isOptionValid = (key: string, value: string) => {
+  const testSelection = { ...selected, [key]: value };
+  const variant = getVariant(testSelection);
+  return !!variant && variant.stock > 0;
+};
 
-  const matchedVariant = getVariant(selected); // 👈 moved here
+  const matchedVariant = getVariant(selected);
+
+  useEffect(() => {
+    if (matchedVariant && matchedVariant.stock > 0) {
+      onSelect(matchedVariant);
+    } else {
+      onSelect(null);
+    }
+  }, [matchedVariant]);
 
   return (
     <div>
@@ -56,10 +60,7 @@ export default function VariantSelector({ variants }: Props) {
               <button
                 key={value}
                 onClick={() =>
-                  setSelected((prev) => ({
-                    ...prev,
-                    [key]: value,
-                  }))
+                  setSelected((prev) => ({ ...prev, [key]: value }))
                 }
                 disabled={!isOptionValid(key, value)}
                 style={{
@@ -96,20 +97,6 @@ export default function VariantSelector({ variants }: Props) {
             )}
           </p>
 
-          <button
-            disabled={matchedVariant.stock === 0}
-            onClick={() => toast.success("Purchase successful 🎉")}
-            style={{
-              marginTop: "10px",
-              padding: "10px 15px",
-              background: matchedVariant.stock > 0 ? "green" : "gray",
-              color: "white",
-              border: "none",
-              cursor: matchedVariant.stock > 0 ? "pointer" : "not-allowed",
-            }}
-          >
-            Buy Now
-          </button>
         </div>
       )}
     </div>
