@@ -12,10 +12,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* PUBLIC */}
         <Route path="/login" element={<Login />} />
 
-        {/* PROTECTED */}
         <Route
           path="/products"
           element={
@@ -43,7 +41,6 @@ function App() {
           }
         />
 
-        {/* DEFAULT */}
         <Route
           path="/"
           element={

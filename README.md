@@ -99,6 +99,16 @@ http://localhost:3000
 
 ---
 
+## 🌐 Live API
+**Base URL:** https://mo-marketplace-mzk52up4b-udara43socialnet-8858s-projects.vercel.app
+
+## 🔐 Sample Login Credentials
+
+| Field    | Value            |
+|----------|------------------|
+| Email    | udara1@gmail.com |
+| Password | udara@1          |
+
 ## 👨‍💻 Author
 
 **Udara Jayawardena**
