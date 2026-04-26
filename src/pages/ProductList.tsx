@@ -20,82 +20,159 @@ export default function ProductList() {
 
   return (
     <Layout>
-      <div
-        style={{ maxWidth: "800px", margin: "0 auto", padding: "40px 20px" }}
-      >
+      <div style={{ maxWidth: "860px", margin: "0 auto", padding: "40px 20px", fontFamily: "'Segoe UI', sans-serif" }}>
+
+        {/* Header */}
         <div
           style={{
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            marginBottom: "24px",
+            marginBottom: "32px",
           }}
         >
-          <h1 style={{ margin: 0 }}>Products</h1>
+          <div>
+            <h1 style={{ margin: "0 0 4px", fontSize: "26px", fontWeight: "700", color: "#111" }}>
+              Products
+            </h1>
+            <p style={{ margin: 0, fontSize: "14px", color: "#888" }}>
+              {!loading && !error ? `${products.length} product${products.length !== 1 ? "s" : ""} found` : ""}
+            </p>
+          </div>
+
           <button
             onClick={() => navigate("/create")}
             style={{
-              padding: "10px 18px",
+              padding: "10px 20px",
               background: "black",
               color: "white",
               border: "none",
-              borderRadius: "6px",
+              borderRadius: "8px",
               cursor: "pointer",
-              fontWeight: "bold",
+              fontWeight: "600",
+              fontSize: "14px",
+              letterSpacing: "0.3px",
             }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = "#333")}
+            onMouseLeave={(e) => (e.currentTarget.style.background = "black")}
           >
             + Create Product
           </button>
         </div>
 
-        {loading && <p style={{ color: "#888" }}>Loading products...</p>}
-
-        {error && <p style={{ color: "red" }}>{error}</p>}
-
-        {!loading && !error && products.length === 0 && (
-          <p style={{ color: "#888" }}>
-            No products found. Create your first one!
-          </p>
+        {/* Loading */}
+        {loading && (
+          <div style={{ textAlign: "center", padding: "60px 0", color: "#aaa", fontSize: "15px" }}>
+            Loading products...
+          </div>
         )}
 
-        <div>
+        {/* Error */}
+        {error && (
+          <div
+            style={{
+              padding: "16px 20px",
+              background: "#fff5f5",
+              border: "1px solid #fcc",
+              borderRadius: "8px",
+              color: "#c00",
+              fontSize: "14px",
+            }}
+          >
+            {error}
+          </div>
+        )}
+
+        {/* Empty State */}
+        {!loading && !error && products.length === 0 && (
+          <div
+            style={{
+              textAlign: "center",
+              padding: "80px 20px",
+              border: "2px dashed #e0e0e0",
+              borderRadius: "16px",
+              color: "#aaa",
+            }}
+          >
+            <div style={{ fontSize: "40px", marginBottom: "12px" }}>📦</div>
+            <p style={{ margin: "0 0 16px", fontSize: "16px", fontWeight: "600", color: "#555" }}>
+              No products yet
+            </p>
+            <p style={{ margin: "0 0 20px", fontSize: "14px" }}>
+              Get started by creating your first product.
+            </p>
+            <button
+              onClick={() => navigate("/create")}
+              style={{
+                padding: "10px 20px",
+                background: "black",
+                color: "white",
+                border: "none",
+                borderRadius: "8px",
+                cursor: "pointer",
+                fontWeight: "600",
+                fontSize: "14px",
+              }}
+            >
+              + Create Product
+            </button>
+          </div>
+        )}
+
+        {/* Product Grid */}
+        <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
           {products.map((product) => (
             <div
               key={product.id}
               onClick={() => navigate(`/products/${product.id}`)}
               style={{
+                background: "white",
                 border: "1px solid #e0e0e0",
-                borderRadius: "8px",
-                padding: "20px",
-                marginBottom: "12px",
+                borderRadius: "12px",
+                padding: "20px 24px",
                 cursor: "pointer",
-                transition: "box-shadow 0.2s",
+                transition: "box-shadow 0.2s, border-color 0.2s",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
               }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,0,0,0.1)")
-              }
-              onMouseLeave={(e) => (e.currentTarget.style.boxShadow = "none")}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.boxShadow = "0 4px 16px rgba(0,0,0,0.08)";
+                e.currentTarget.style.borderColor = "#bbb";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.boxShadow = "none";
+                e.currentTarget.style.borderColor = "#e0e0e0";
+              }}
             >
-              <h3 style={{ margin: "0 0 6px 0" }}>{product.name}</h3>
+              <div style={{ flex: 1 }}>
+                <h3 style={{ margin: "0 0 6px", fontSize: "16px", fontWeight: "600", color: "#111" }}>
+                  {product.name}
+                </h3>
 
-              {product.description && (
-                <p style={{ margin: "0 0 10px 0", color: "#555" }}>
-                  {product.description}
-                </p>
-              )}
+                {product.description && (
+                  <p style={{ margin: "0 0 10px", color: "#777", fontSize: "14px", lineHeight: "1.5" }}>
+                    {product.description}
+                  </p>
+                )}
 
-              <span
-                style={{
-                  fontSize: "12px",
-                  background: "#f0f0f0",
-                  padding: "3px 8px",
-                  borderRadius: "20px",
-                  color: "#444",
-                }}
-              >
-                {product.variants?.length || 0} variant
-                {product.variants?.length !== 1 ? "s" : ""}
-              </span>
+                <span
+                  style={{
+                    fontSize: "12px",
+                    background: "#f0f0f0",
+                    padding: "3px 10px",
+                    borderRadius: "20px",
+                    color: "#555",
+                    fontWeight: "500",
+                  }}
+                >
+                  {product.variants?.length || 0} variant
+                  {product.variants?.length !== 1 ? "s" : ""}
+                </span>
+              </div>
+
+              {/* Arrow */}
+              <span style={{ fontSize: "18px", color: "#ccc", marginLeft: "16px" }}>→</span>
             </div>
           ))}
         </div>
