@@ -20,7 +20,7 @@ export default function CreateProduct() {
     try {
       setLoading(true);
 
-      const product = await createProduct({
+      await createProduct({
         name,
         description,
       });
