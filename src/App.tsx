@@ -5,7 +5,6 @@ import AddVariants from "./pages/AddVariants";
 import CreateProduct from "./pages/CreateProduct";
 import Login from "./pages/Login";
 import ProtectedRoute from "./routes/ProtectedRoute";
-// import { getToken } from "./store/auth";
 import { Navigate } from "react-router-dom";
 import { isAuthenticated } from "./store/auth";
 

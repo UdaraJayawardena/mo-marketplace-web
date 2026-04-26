@@ -18,7 +18,6 @@ export default function Login() {
 
       setToken(res.data.access_token);
 
-      // IMPORTANT: wait for storage sync
       setTimeout(() => {
         navigate("/products", { replace: true });
       }, 0);
@@ -66,9 +65,20 @@ export default function Login() {
               justifyContent: "center",
             }}
           >
-            <span style={{ color: "white", fontWeight: "bold", fontSize: "20px" }}>M</span>
+            <span
+              style={{ color: "white", fontWeight: "bold", fontSize: "20px" }}
+            >
+              M
+            </span>
           </div>
-          <h2 style={{ margin: 0, fontSize: "22px", fontWeight: "700", color: "#111" }}>
+          <h2
+            style={{
+              margin: 0,
+              fontSize: "22px",
+              fontWeight: "700",
+              color: "#111",
+            }}
+          >
             Welcome
           </h2>
           <p style={{ margin: "6px 0 0", color: "#888", fontSize: "14px" }}>
@@ -78,7 +88,15 @@ export default function Login() {
 
         {/* Email */}
         <div style={{ marginBottom: "16px" }}>
-          <label style={{ display: "block", fontSize: "13px", fontWeight: "600", color: "#444", marginBottom: "6px" }}>
+          <label
+            style={{
+              display: "block",
+              fontSize: "13px",
+              fontWeight: "600",
+              color: "#444",
+              marginBottom: "6px",
+            }}
+          >
             Email address
           </label>
           <input
@@ -105,11 +123,26 @@ export default function Login() {
 
         {/* Password */}
         <div style={{ marginBottom: "24px" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "6px" }}>
-            <label style={{ fontSize: "13px", fontWeight: "600", color: "#444" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              marginBottom: "6px",
+            }}
+          >
+            <label
+              style={{ fontSize: "13px", fontWeight: "600", color: "#444" }}
+            >
               Password
             </label>
-            <a href="#" style={{ fontSize: "13px", color: "#555", textDecoration: "none" }}>
+            <a
+              href="#"
+              style={{
+                fontSize: "13px",
+                color: "#555",
+                textDecoration: "none",
+              }}
+            >
               Forgot password?
             </a>
           </div>
@@ -157,9 +190,19 @@ export default function Login() {
         </button>
 
         {/* Footer */}
-        <p style={{ textAlign: "center", marginTop: "24px", fontSize: "13px", color: "#888" }}>
+        <p
+          style={{
+            textAlign: "center",
+            marginTop: "24px",
+            fontSize: "13px",
+            color: "#888",
+          }}
+        >
           Don't have an account?{" "}
-          <a href="/register" style={{ color: "#111", fontWeight: "600", textDecoration: "none" }}>
+          <a
+            href="/register"
+            style={{ color: "#111", fontWeight: "600", textDecoration: "none" }}
+          >
             Sign up
           </a>
         </p>

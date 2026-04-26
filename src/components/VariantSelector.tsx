@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react"; // 👈 added useEffect
+import { useState, useEffect } from "react";
 import type { Variant } from "../types";
-import { toast } from "react-toastify";
 
 interface Props {
   variants: Variant[];
