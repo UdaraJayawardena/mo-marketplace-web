@@ -1,53 +1,104 @@
-# MO Marketplace
+# MO Marketplace Web
 
-A full-stack marketplace application built with NestJS and React.
+Frontend application for the MO Marketplace built using React, Vite, and TypeScript. Provides UI for product browsing, variant selection, and a simulated purchase flow.
 
 ---
 
 ## 🚀 Features
 
-### Backend
-- JWT Authentication (Register/Login)
-- Product management
-- Variant system with combination key logic
-- Duplicate variant prevention
-- DTO validation (class-validator)
-- Swagger API documentation
+### 🔐 Authentication
+- Login UI
+- JWT-based session handling
+- Protected routes
 
-### Frontend
+### 📦 Product Features
 - Product listing page
 - Product detail page
-- Variant selector system
-- Out-of-stock handling
-- Quick Buy flow
+- Create product page
+
+### 🎨 Variant Selection
+- Dynamic attribute-based selection (color, size, etc.)
+- Only valid combinations selectable
+- Out-of-stock options disabled
+- Real-time variant matching
+
+### 🛒 Quick Buy Flow
+- Select variant
+- Click "Buy Now"
+- Simulated purchase confirmation
+
+### ⚠️ Edge Case Handling
+- Disable invalid variant combinations
+- Disable out-of-stock options
+- Basic form validation
 
 ---
 
-## 🧠 Key Design Decisions
+## 📁 Project Structure
 
-- Variants use `combination_key` to ensure uniqueness
-- Attributes stored as JSON for flexibility
-- Backend validates all inputs using DTOs
-- Frontend handles UX-level validation (disabled options)
-- Separation of concerns between products and variants modules
-
----
-
-## 🛠️ Tech Stack
-
-- NestJS
-- TypeORM
-- PostgreSQL
-- React (Vite)
-- Axios
-- React Router
+```
+src/
+├── pages/         # Login, ProductList, ProductDetail, CreateProduct, AddVariants
+├── components/    # VariantSelector, Navbar, Layout
+├── api/           # Axios client & API functions
+├── store/         # Auth state (JWT handling)
+└── types/         # Shared TypeScript interfaces
+```
 
 ---
 
 ## ⚙️ Setup Instructions
 
-### Backend
+### 🔧 Prerequisites
+- Node.js v20+
+- npm v9+
+
+### 🖥️ Installation
+
 ```bash
-cd mo-marketplace-api
+git clone <repo-url>
+cd mo-marketplace-web
 npm install
-npm run start:dev
+```
+
+### ▶️ Run App
+
+```bash
+npm run dev
+```
+
+App runs at: `http://localhost:5173`
+
+### 🔗 Backend Connection
+
+Ensure the backend is running at:
+```
+http://localhost:3000
+```
+
+---
+
+## 🧠 Key Features Explained
+
+### 1. Variant Selection Logic
+- Users select attributes (e.g. color, size)
+- System finds matching variant dynamically
+- Invalid combinations are disabled
+
+### 2. Out-of-Stock Handling
+- Variants with `stock = 0` are disabled
+- UI reflects unavailable options clearly
+
+### 3. Quick Buy Flow
+- Simulates purchase without payment integration
+- Displays success message upon purchase
+
+### 4. Protected Routes
+- Users must log in to access product pages
+- JWT stored and used for API calls
+
+---
+
+## 👨‍💻 Author
+
+**Udara Jayawardena**
